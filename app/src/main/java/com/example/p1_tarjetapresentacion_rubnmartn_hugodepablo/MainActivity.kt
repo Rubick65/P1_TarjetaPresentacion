@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -86,12 +87,19 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .padding(bottom = 40.dp)
+            .padding(bottom = 50.dp)
     ) {
 
-        for (i in 0 until CANTIDAD_CONTACTOS) {
-            FilasContacto(listaTextos[i], listaIconos[i])
-            Spacer(Modifier.height(10.dp))
+        Column  (
+            horizontalAlignment = Alignment.Start
+
+        ){
+            for (i in 0 until CANTIDAD_CONTACTOS) {
+                FilasContacto(listaTextos[i], listaIconos[i])
+
+                if(i < CANTIDAD_CONTACTOS - 1)
+                    Spacer(Modifier.height(10.dp));
+            }
         }
 
     }
@@ -103,31 +111,26 @@ private fun FilasContacto(
     imagenId: Int,
     modifier: Modifier = Modifier
 ) {
+
     Row(
-        modifier = Modifier.padding(start = 50.dp, end = 40.dp),
-        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Icon(
-                painter = painterResource(imagenId),
-                contentDescription = null,
-                tint = Color.Black,
-                modifier = Modifier
-                    .size(24.dp)
-            )
+        Icon(
+            painter = painterResource(imagenId),
+            contentDescription = null,
+            tint = Color.Black,
+            modifier = Modifier
+                .size(24.dp)
+        )
 
-            Spacer(Modifier.width(10.dp))
+        Spacer(Modifier.width(10.dp))
 
-            Text(
-                text = stringResource(textoID),
-                textAlign = TextAlign.Start,
-                color = Color.Black
-            )
-        }
-
+        Text(
+            text = stringResource(textoID),
+            textAlign = TextAlign.Start,
+            color = Color.Black
+        )
     }
+
 }
 
 

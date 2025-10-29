@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">P1_TarjetaPresentacion_RubénMartín_HugoDePablo</string>
+    <string name="nombre1">Hugo de Pablo</string>
+    <string name="nombre2">Ruben Martin</string>
+    <string name="enlace">y</string>
+    <string name="titulo">Desarrolladores de Android espectaculares</string>
+    <string name="union"><![CDATA[&&]]></string>
 </resources>

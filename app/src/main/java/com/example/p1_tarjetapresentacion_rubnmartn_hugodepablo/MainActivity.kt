@@ -50,6 +50,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/**
+ * Función que contiene todos los elementos de la interfaz
+ * @param modifier Sirve para modificar las propiedades del contenedor
+ */
 @Composable
 fun ContenedorUI(modifier: Modifier = Modifier) {
     val imagen = painterResource(R.drawable.gengar)
@@ -61,16 +65,65 @@ fun ContenedorUI(modifier: Modifier = Modifier) {
             modifier = Modifier.fillMaxSize()
         )
 
-        // Aquí va la función del centro (Hugo De Pablo)
-        ContenedorCentro()
-        // Aquí va la función de abajo (Rubén Martín Andrade)
-        ContenedorContacto()
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ){
+            // Aquí va la función de abajo (Rubén Martín Andrade)
+            ContenedorContacto(modifier = Modifier.align(Alignment.Center))
+            // Aquí va la función del centro (Hugo De Pablo)
+            ContenedorCentro(modifier = Modifier.align(Alignment.TopCenter))
+
+        }
+
+    }
+}
+
+
+@Composable
+fun ContenedorCentro(modifier: Modifier = Modifier) {
+    val logoKotlin = painterResource(R.drawable.kotlin_logo)
+    val logoAndroid = painterResource(R.drawable.android_studio_logo)
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .padding(top = 50.dp)
+    ) {
+        Row(modifier = Modifier.padding(bottom = 10.dp)) {
+            CrearImagen(
+                logoKotlin,
+                modifier
+                    .size(120.dp))
+            CrearTexto(
+                stringResource(R.string.union),
+                modifier = modifier.padding(top = 30.dp, end = 20.dp),
+                size = 50
+            )
+            CrearImagen(
+                logoAndroid, modifier
+                    .size(120.dp)
+            )
+        }
+        // el size = es para el tamaño de cada palabra
+        CrearTexto(
+            stringResource(R.string.nombre1),
+            30,
+            modifier = modifier.padding(bottom = 15.dp)
+        )
+        CrearTexto(
+            stringResource(R.string.nombre2),
+            30
+        )
+        CrearTexto(
+            stringResource(R.string.titulo),
+            size = 24,
+            modifier = modifier.padding(top = 30.dp)
+        )
     }
 }
 
 /**
  * Función que crea el contenedor que guarda los contactos
- * @param modifier Parámetro que sirve para modificar el contenedor
+ * @param modifier Sirve para modificar las propiedades del contenedor
  */
 @Composable
 private fun ContenedorContacto(modifier: Modifier = Modifier) {
@@ -89,30 +142,59 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
         R.string.github_inventado
     )
 
-    // Columnas principal que posiciona al contenedor con los contactos abajo y centrado
+
+    // Columna que contiene los contactos
     Column(
-        verticalArrangement = Arrangement.Center,// Posicionar hijos abajo
-        horizontalAlignment = Alignment.CenterHorizontally,// Centrar hijos
+
+        horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
         modifier = modifier
-            .fillMaxSize() // Ocupa todo el espacio en pantalla
+    ) {
+        // Iteramos hasta la cantidad de elementos de contacto que tenemos
+        for (i in 0 until CANTIDAD_CONTACTOS) {
+            // LLamamos a la función que crea una fila con el icono y el contacto que pasamos como argumentos
+            FilasContacto(listaTextos[i], listaIconos[i])
+
+            // Sí la posición actual es menor que la cantidad de contactos menos uno
+            if (i < CANTIDAD_CONTACTOS - 1)
+            // Aplicamos una separación entre cada fila
+                Spacer(Modifier.height(10.dp));
+        }
+    }
+
+}
+
+/**
+ * Función que crear las filas con los contactos
+ * @param textoID Id que hace referencia al texto del contacto que se va a poner
+ * @param imagenId Id que hace referencia a la imagen del contacto que se va a poner
+ * @param modifier Sirve para modificar las propiedades del contenedor
+ */
+@Composable
+private fun FilasContacto(
+    textoID: Int,
+    imagenId: Int,
+    modifier: Modifier = Modifier
+) {
+
+    // Fila que contiene el icono y el texto del contacot
+    Row(
+        verticalAlignment = Alignment.CenterVertically // Centramos todos los elementos verticalmente
     ) {
 
-        // Columna que contiene los contactos
-        Column(
-            horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
-            modifier = Modifier.padding(bottom = 20.dp)
-        ) {
-            // Iteramos hasta la cantidad de elementos de contacto que tenemos
-            for (i in 0 until CANTIDAD_CONTACTOS) {
-                // LLamamos a la función que crea una fila con el icono y el contacto que pasamos como argumentos
-                FilasContacto(listaTextos[i], listaIconos[i])
+        // Icono del contacto
+        Icon(
+            painter = painterResource(imagenId), // Imagen del icono
+            contentDescription = null, //Sin descripción de voz
+            tint = Color.White, // Ponemos las imagenes a color negro
+            modifier = Modifier
+                .size(29.dp) // Tamaño estandar para todos los iconos
+        )
 
-                // Sí la posición actual es menor que la cantidad de contactos menos uno
-                if (i < CANTIDAD_CONTACTOS - 1)
-                // Aplicamos una separación entre cada fila
-                    Spacer(Modifier.height(10.dp));
-            }
-        }
+        // Separación entre icono y texto
+        Spacer(Modifier.width(10.dp))
+
+        // Texto del contacto
+        CrearTexto(stringResource(textoID), size = 18)
 
     }
 }
@@ -136,66 +218,6 @@ fun CrearImagen(imagen: Painter, modifier: Modifier = Modifier) {
         contentDescription = null,
         modifier = modifier
     )
-}
-
-@Composable
-fun ContenedorCentro(modifier: Modifier = Modifier) {
-    val logoKotlin = painterResource(R.drawable.kotlin_logo)
-    val logoAndroid = painterResource(R.drawable.android_studio_logo)
-    Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .fillMaxSize()
-            .padding(top = 50.dp)
-    ) {
-        Row() {
-            CrearImagen(logoKotlin,modifier.size(120.dp))
-            CrearTexto(stringResource(R.string.union), modifier = modifier.padding(top = 30.dp), size = 50 )
-            CrearImagen(logoAndroid, modifier.size(120.dp).padding(start = 15.dp))
-        }
-        // el size = es para el tamaño de cada palabra
-        CrearTexto(stringResource(R.string.nombre1), 30, modifier = modifier.padding(bottom = 15.dp))
-        CrearTexto(stringResource(R.string.nombre2), 30)
-        CrearTexto(stringResource(R.string.titulo), size = 18, modifier = modifier.padding(top = 30.dp))
-    }
-}
-
-/**
- * Función que crear las filas con los contactos
- * @param textoID Id que hace referencia al texto del contacto que se va a poner
- * @param imagenId Id que hace referencia a la imagen del contacto que se va a poner
- * @param modifier Parámetro que sirve para modificar el contenedor
- */
-@Composable
-private fun FilasContacto(
-    textoID: Int,
-    imagenId: Int,
-    modifier: Modifier = Modifier
-) {
-
-    // Fila que contiene el icono y el texto del contacot
-    Row(
-    ) {
-        // Icono del contacto
-        Icon(
-            painter = painterResource(imagenId), // Imagen del icono
-            contentDescription = null, //Sin descripción de voz
-            tint = Color.White, // Ponemos las imagenes a color negro
-            modifier = Modifier
-                .size(28.dp) // Tamaño estandar para todos los iconos
-        )
-
-        // Separación entre icono y texto
-        Spacer(Modifier.width(10.dp))
-
-        // Texto del contacto
-        Text(
-            text = stringResource(textoID), // String del contacto
-            color = Color.White,// Indicamos que el color del texto sea negro
-            fontSize = 18.sp
-        )
-    }
 }
 
 

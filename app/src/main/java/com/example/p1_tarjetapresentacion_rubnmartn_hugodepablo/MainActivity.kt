@@ -100,7 +100,7 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
         // Columna que contiene los contactos
         Column(
             horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
-            modifier = Modifier.padding(top = 30.dp)// Indicamos una separación abajo de la columna
+            modifier = Modifier.padding(bottom = 20.dp)
         ) {
             // Iteramos hasta la cantidad de elementos de contacto que tenemos
             for (i in 0 until CANTIDAD_CONTACTOS) {
@@ -119,10 +119,10 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
 
 
 @Composable
-fun CrearTexto(texto: String, modifier: Modifier = Modifier) {
+fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier) {
     Text(
         text = texto,
-        fontSize = 50.sp,
+        fontSize = size.sp,
         color = Color.White,
         lineHeight = 20.sp,
         modifier = modifier
@@ -147,25 +147,18 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .fillMaxSize()
-            .padding(top = 10.dp)
+            .padding(top = 50.dp)
     ) {
         Row() {
             CrearImagen(logoKotlin,modifier.size(120.dp))
-            CrearTexto(stringResource(R.string.union), modifier.padding(top = 30.dp))
+            CrearTexto(stringResource(R.string.union), modifier = modifier.padding(top = 30.dp), size = 50 )
             CrearImagen(logoAndroid, modifier.size(120.dp).padding(start = 15.dp))
         }
-        CrearTexto(stringResource(R.string.nombre1))
-        CrearTexto(stringResource(R.string.enlace))
-        CrearTexto(stringResource(R.string.nombre2))
-        Text(
-            text = stringResource(R.string.titulo),
-            color = Color.Green,
-            fontSize = 18.sp,
-            modifier = modifier.padding(top = 10.dp)
-        )
+        // el size = es para el tamaño de cada palabra
+        CrearTexto(stringResource(R.string.nombre1), 30, modifier = modifier.padding(bottom = 15.dp))
+        CrearTexto(stringResource(R.string.nombre2), 30)
+        CrearTexto(stringResource(R.string.titulo), size = 18, modifier = modifier.padding(top = 30.dp))
     }
-
-
 }
 
 /**
@@ -190,7 +183,7 @@ private fun FilasContacto(
             contentDescription = null, //Sin descripción de voz
             tint = Color.White, // Ponemos las imagenes a color negro
             modifier = Modifier
-                .size(24.dp) // Tamaño estandar para todos los iconos
+                .size(28.dp) // Tamaño estandar para todos los iconos
         )
 
         // Separación entre icono y texto
@@ -199,7 +192,8 @@ private fun FilasContacto(
         // Texto del contacto
         Text(
             text = stringResource(textoID), // String del contacto
-            color = Color.White // Indicamos que el color del texto sea negro
+            color = Color.White,// Indicamos que el color del texto sea negro
+            fontSize = 18.sp
         )
     }
 }

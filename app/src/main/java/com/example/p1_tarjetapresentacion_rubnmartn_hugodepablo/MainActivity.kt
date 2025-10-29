@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ContenedorUI(modifier: Modifier = Modifier) {
-    val imagen = painterResource(R.drawable.fondo)
+    val imagen = painterResource(R.drawable.gengar)
     Box(modifier = modifier) {
         Image(
             painter = imagen,

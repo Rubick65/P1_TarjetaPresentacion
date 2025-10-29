@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,11 +17,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -67,48 +68,54 @@ fun ContenedorUI(modifier: Modifier = Modifier) {
     }
 }
 
+/**
+ * Función que crea el contenedor que guarda los contactos
+ * @param modifier Parámetro que sirve para modificar el contenedor
+ */
 @Composable
 private fun ContenedorContacto(modifier: Modifier = Modifier) {
-    val CANTIDAD_CONTACTOS = 4
-    val listaIconos = listOf<Int>(
+    val CANTIDAD_CONTACTOS = 4 // Constante con la cantidad de contactos
+    val listaIconos = listOf<Int>( // Lista con los ids de referencia de los iconos
         R.drawable.phone_icono,
         R.drawable.share_icono,
         R.drawable.mail_icono,
         R.drawable.github_logo
     )
 
-    val listaTextos = listOf<Int>(
+    val listaTextos = listOf<Int>( // Lista con los ids de referencia para los textos
         R.string.numero_inventado,
         R.string.redes_inventadas,
         R.string.email_inventado,
         R.string.github_inventado
     )
 
+    // Columnas principal que posiciona al contenedor con los contactos abajo y centrado
     Column(
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,// Posicionar hijos abajo
+        horizontalAlignment = Alignment.CenterHorizontally,// Centrar hijos
         modifier = modifier
-            .fillMaxSize()
-            .padding(bottom = 50.dp)
+            .fillMaxSize() // Ocupa todo el espacio en pantalla
     ) {
 
-        Column  (
-            horizontalAlignment = Alignment.Start
-
-        ){
+        // Columna que contiene los contactos
+        Column(
+            horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
+            modifier = Modifier.padding(top = 30.dp)// Indicamos una separación abajo de la columna
+        ) {
+            // Iteramos hasta la cantidad de elementos de contacto que tenemos
             for (i in 0 until CANTIDAD_CONTACTOS) {
+                // LLamamos a la función que crea una fila con el icono y el contacto que pasamos como argumentos
                 FilasContacto(listaTextos[i], listaIconos[i])
 
-                if(i < CANTIDAD_CONTACTOS - 1)
+                // Sí la posición actual es menor que la cantidad de contactos menos uno
+                if (i < CANTIDAD_CONTACTOS - 1)
+                // Aplicamos una separación entre cada fila
                     Spacer(Modifier.height(10.dp));
             }
         }
 
     }
 }
-
-
-
 
 
 @Composable
@@ -161,37 +168,39 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
 
 }
 
-
+/**
+ * Función que crear las filas con los contactos
+ * @param textoID Id que hace referencia al texto del contacto que se va a poner
+ * @param imagenId Id que hace referencia a la imagen del contacto que se va a poner
+ * @param modifier Parámetro que sirve para modificar el contenedor
+ */
 @Composable
 private fun FilasContacto(
     textoID: Int,
     imagenId: Int,
     modifier: Modifier = Modifier
 ) {
+
+    // Fila que contiene el icono y el texto del contacot
     Row(
-        modifier = Modifier.padding(start = 50.dp, end = 40.dp),
-        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Icon(
-                painter = painterResource(imagenId),
-                contentDescription = null,
-                tint = Color.Black,
-                modifier = Modifier
-                    .size(24.dp)
-            )
+        // Icono del contacto
+        Icon(
+            painter = painterResource(imagenId), // Imagen del icono
+            contentDescription = null, //Sin descripción de voz
+            tint = Color.White, // Ponemos las imagenes a color negro
+            modifier = Modifier
+                .size(24.dp) // Tamaño estandar para todos los iconos
+        )
 
-            Spacer(Modifier.width(10.dp))
+        // Separación entre icono y texto
+        Spacer(Modifier.width(10.dp))
 
-            Text(
-                text = stringResource(textoID),
-                textAlign = TextAlign.Start,
-                color = Color.Black
-            )
-        }
-
+        // Texto del contacto
+        Text(
+            text = stringResource(textoID), // String del contacto
+            color = Color.White // Indicamos que el color del texto sea negro
+        )
     }
 }
 

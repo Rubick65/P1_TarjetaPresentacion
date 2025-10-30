@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
  */
 @Composable
 fun ContenedorUI(modifier: Modifier = Modifier) {
-    val imagen = painterResource(R.drawable.gengar)
+    val imagen = painterResource(R.drawable.gengar) //fondo de pantalla
     Box(modifier = modifier) {
         Image(
             painter = imagen,
@@ -78,24 +79,30 @@ fun ContenedorUI(modifier: Modifier = Modifier) {
     }
 }
 
-
+/**
+ * Funcion que contiene la presentacion principal del equipo
+ * @param modifier para modificar las caracteristicas del contenedor
+ */
 @Composable
 fun ContenedorCentro(modifier: Modifier = Modifier) {
+    //Imagenes a implementar
     val logoKotlin = painterResource(R.drawable.kotlin_logo)
     val logoAndroid = painterResource(R.drawable.android_studio_logo)
+    //Columna que contiene a todos los elementos
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
-            .padding(top = 50.dp)
+        horizontalAlignment = Alignment.CenterHorizontally, //Indicamos que se centre en el medio
+        modifier = modifier.padding(top = 50.dp) //Pequeña separacion arriba para que no este tan junto
     ) {
-        Row(modifier = Modifier.padding(bottom = 10.dp)) {
+        //Fila que contendra las imagenes principales.
+        Row(modifier = Modifier.padding(bottom = 10.dp)) { //Separacion con la descripcion de abajo
+            //Se crean las imagenes, indicandoles la imagen y su tamaño
             CrearImagen(
                 logoKotlin,
                 modifier
                     .size(120.dp))
             CrearTexto(
-                stringResource(R.string.union),
-                modifier = modifier.padding(top = 30.dp, end = 20.dp),
+                stringResource(R.string.union), //Se crea un texto de enlace entre imagenes
+                modifier = modifier.padding(top = 30.dp, end = 20.dp), //Se ajusta para que quede centrado
                 size = 50
             )
             CrearImagen(
@@ -104,6 +111,7 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
             )
         }
         // el size = es para el tamaño de cada palabra
+        //Se crea los nombres y la descripcion
         CrearTexto(
             stringResource(R.string.nombre1),
             30,
@@ -145,7 +153,6 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
 
     // Columna que contiene los contactos
     Column(
-
         horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
         modifier = modifier
     ) {
@@ -180,7 +187,6 @@ private fun FilasContacto(
     Row(
         verticalAlignment = Alignment.CenterVertically // Centramos todos los elementos verticalmente
     ) {
-
         // Icono del contacto
         Icon(
             painter = painterResource(imagenId), // Imagen del icono
@@ -199,18 +205,30 @@ private fun FilasContacto(
     }
 }
 
-
+/**
+ * Funcion para crear el texto de los contenedores
+ * @param texto texto a poner
+ * @param size tamaño del texto a introducir
+ * @param modifier para modificar las caracteristicas del texto
+ * @param fuente tipo de fuente del texto
+ */
 @Composable
-fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier) {
+fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier, fuente: FontFamily = FontFamily.Default) {
     Text(
         text = texto,
         fontSize = size.sp,
         color = Color.White,
-        lineHeight = 20.sp,
+        lineHeight = 20.sp, //Espacio predeterminado entre filas
+        fontFamily = fuente,
         modifier = modifier
     )
 }
 
+/**
+ * Funcion para crear una imagen en el contenedor
+ * @param imagen imagen a enseñar
+ * @param modifier para modificar las caracteristicas de la imagen
+ */
 @Composable
 fun CrearImagen(imagen: Painter, modifier: Modifier = Modifier) {
     Image(
@@ -219,7 +237,6 @@ fun CrearImagen(imagen: Painter, modifier: Modifier = Modifier) {
         modifier = modifier
     )
 }
-
 
 @Preview(
     showBackground = true,

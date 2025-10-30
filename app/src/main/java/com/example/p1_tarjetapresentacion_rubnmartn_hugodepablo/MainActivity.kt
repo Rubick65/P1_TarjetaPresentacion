@@ -5,20 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,7 +26,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -135,15 +129,15 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
  */
 @Composable
 private fun ContenedorContacto(modifier: Modifier = Modifier) {
-    val CANTIDAD_CONTACTOS = 4 // Constante con la cantidad de contactos
-    val listaIconos = listOf<Int>( // Lista con los IDs de referencia de los iconos
+    val cantidadContactos = 4 // Constante con la cantidad de contactos
+    val listaIconos = listOf( // Lista con los IDs de referencia de los iconos
         R.drawable.phone_icono,
         R.drawable.share_icono,
         R.drawable.mail_icono,
         R.drawable.github_logo
     )
 
-    val listaTextos = listOf<Int>( // Lista con los IDs de referencia para los textos
+    val listaTextos = listOf( // Lista con los IDs de referencia para los textos
         R.string.numero_inventado,
         R.string.redes_inventadas,
         R.string.email_inventado,
@@ -156,14 +150,14 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
         modifier = modifier
     ) {
         // Iteramos hasta la cantidad de elementos de contacto que tenemos
-        for (i in 0 until CANTIDAD_CONTACTOS) {
+        for (i in 0 until cantidadContactos) {
             // LLamamos a la función que crea una fila con el icono y el contacto que pasamos como argumentos
             FilasContacto(listaTextos[i], listaIconos[i])
 
             // Sí la posición actual es menor que la cantidad de contactos menos uno
-            if (i < CANTIDAD_CONTACTOS - 1)
+            if (i < cantidadContactos - 1)
             // Aplicamos una separación entre cada fila
-                Spacer(Modifier.height(10.dp));
+                Spacer(Modifier.height(10.dp))
         }
     }
 

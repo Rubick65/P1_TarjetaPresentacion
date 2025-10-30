@@ -29,11 +29,13 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.res.ResourcesCompat
 import com.example.p1_tarjetapresentacion_rubnmartn_hugodepablo.ui.theme.P1_TarjetaPresentacion_RubénMartín_HugoDePabloTheme
 
 class MainActivity : ComponentActivity() {
@@ -115,7 +117,7 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
         CrearTexto(
             stringResource(R.string.nombre1),
             30,
-            modifier = modifier.padding(bottom = 15.dp)
+            modifier = modifier.padding(bottom = 15.dp),
         )
         CrearTexto(
             stringResource(R.string.nombre2),
@@ -213,13 +215,12 @@ private fun FilasContacto(
  * @param fuente tipo de fuente del texto
  */
 @Composable
-fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier, fuente: FontFamily = FontFamily.Default) {
+fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier) {
     Text(
         text = texto,
         fontSize = size.sp,
         color = Color.White,
         lineHeight = 20.sp, //Espacio predeterminado entre filas
-        fontFamily = fuente,
         modifier = modifier
     )
 }

@@ -181,7 +181,7 @@ private fun FilasContacto(
     // Fila que contiene el icono y el texto del contacto
     Row(
         verticalAlignment = Alignment.CenterVertically, // Centramos todos los elementos verticalmente
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth() // Hacemos que la fila ocupe todo el largo de la columna
     ) {
         // Icono del contacto
         Icon(

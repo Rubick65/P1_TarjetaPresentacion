@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -41,7 +42,6 @@ class MainActivity : ComponentActivity() {
             P1_TarjetaPresentacion_RubénMartín_HugoDePabloTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     ContenedorUI(modifier = Modifier.padding(innerPadding))
-
                 }
             }
         }
@@ -151,6 +151,7 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
         modifier = modifier.padding(bottom = 15.dp) // Indicamos un padding abajo para separar el contenedor
+            .width(275.dp) // Indicamos un tamaño fijo para la columna
     ) {
         // Iteramos hasta la cantidad de elementos de contacto que tenemos
         for (i in 0 until cantidadContactos) {
@@ -179,7 +180,8 @@ private fun FilasContacto(
 ) {
     // Fila que contiene el icono y el texto del contacto
     Row(
-        verticalAlignment = Alignment.CenterVertically // Centramos todos los elementos verticalmente
+        verticalAlignment = Alignment.CenterVertically, // Centramos todos los elementos verticalmente
+        modifier = Modifier.fillMaxWidth() // Hacemos que la fila ocupe todo el largo de la columna
     ) {
         // Icono del contacto
         Icon(
@@ -194,7 +196,10 @@ private fun FilasContacto(
         Spacer(Modifier.width(10.dp))
 
         // Texto del contacto
-        CrearTexto(stringResource(textoID), size = 18)
+        CrearTexto(
+            stringResource(textoID),
+            size = 18,
+            )
 
     }
 }

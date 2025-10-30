@@ -41,7 +41,6 @@ class MainActivity : ComponentActivity() {
             P1_TarjetaPresentacion_RubénMartín_HugoDePabloTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     ContenedorUI(modifier = Modifier.padding(innerPadding))
-
                 }
             }
         }
@@ -151,6 +150,7 @@ private fun ContenedorContacto(modifier: Modifier = Modifier) {
     Column(
         horizontalAlignment = Alignment.Start,// Indicamos que los elementos hijos deben estar pegados al inicio del contenedor
         modifier = modifier.padding(bottom = 15.dp) // Indicamos un padding abajo para separar el contenedor
+            .width(275.dp) // Indicamos un tamaño fijo para la columna
     ) {
         // Iteramos hasta la cantidad de elementos de contacto que tenemos
         for (i in 0 until cantidadContactos) {
@@ -194,7 +194,10 @@ private fun FilasContacto(
         Spacer(Modifier.width(10.dp))
 
         // Texto del contacto
-        CrearTexto(stringResource(textoID), size = 18)
+        CrearTexto(
+            stringResource(textoID),
+            size = 18,
+            )
 
     }
 }

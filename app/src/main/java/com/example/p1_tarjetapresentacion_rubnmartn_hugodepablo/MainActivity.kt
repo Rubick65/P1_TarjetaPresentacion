@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,7 +45,6 @@ class MainActivity : ComponentActivity() {
             P1_TarjetaPresentacion_RubénMartín_HugoDePabloTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     ContenedorUI(modifier = Modifier.padding(innerPadding))
-
                 }
             }
         }
@@ -58,24 +58,19 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ContenedorUI(modifier: Modifier = Modifier) {
     val imagen = painterResource(R.drawable.gengar) //fondo de pantalla
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier.fillMaxSize()// El contenedor ocupa toda la pantalla
+    ) {
         Image(
             painter = imagen,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
-
-        Box(
-            modifier = Modifier.fillMaxSize()
-        ){
-            // Aquí va la función de abajo (Rubén Martín Andrade)
-            ContenedorContacto(modifier = Modifier.align(Alignment.Center))
-            // Aquí va la función del centro (Hugo De Pablo)
-            ContenedorCentro(modifier = Modifier.align(Alignment.TopCenter))
-
-        }
-
+        // Aquí va la función de abajo (Rubén Martín Andrade)
+        ContenedorContacto(modifier = Modifier.align(Alignment.Center))
+        // Aquí va la función del centro (Hugo De Pablo)
+        ContenedorCentro(modifier = Modifier.align(Alignment.TopCenter))
     }
 }
 
@@ -88,21 +83,27 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
     //Imagenes a implementar
     val logoKotlin = painterResource(R.drawable.kotlin_logo)
     val logoAndroid = painterResource(R.drawable.android_studio_logo)
+
     //Columna que contiene a todos los elementos
     Column(
         horizontalAlignment = Alignment.CenterHorizontally, //Indicamos que se centre en el medio
         modifier = modifier.padding(top = 50.dp) //Pequeña separacion arriba para que no este tan junto
     ) {
         //Fila que contendra las imagenes principales.
-        Row(modifier = Modifier.padding(bottom = 10.dp)) { //Separacion con la descripcion de abajo
+        Row(modifier = Modifier.padding(bottom = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+            ) { //Separacion con la descripcion de abajo
             //Se crean las imagenes, indicandoles la imagen y su tamaño
             CrearImagen(
                 logoKotlin,
                 modifier
-                    .size(120.dp))
+                    .size(130.dp)
+            )
             CrearTexto(
                 stringResource(R.string.union), //Se crea un texto de enlace entre imagenes
-                modifier = modifier.padding(top = 30.dp, end = 20.dp), //Se ajusta para que quede centrado
+                modifier = modifier.padding(
+                    end = 20.dp
+                ), //Se ajusta para que quede centrado
                 size = 50
             )
             CrearImagen(
@@ -110,7 +111,6 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
                     .size(120.dp)
             )
         }
-        // el size = es para el tamaño de cada palabra
         //Se crea los nombres y la descripcion
         CrearTexto(
             stringResource(R.string.nombre1),
@@ -124,7 +124,7 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
         CrearTexto(
             stringResource(R.string.titulo),
             size = 24,
-            modifier = modifier.padding(top = 30.dp)
+            modifier = modifier.padding(top = 25.dp)
         )
     }
 }
@@ -136,20 +136,19 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
 @Composable
 private fun ContenedorContacto(modifier: Modifier = Modifier) {
     val CANTIDAD_CONTACTOS = 4 // Constante con la cantidad de contactos
-    val listaIconos = listOf<Int>( // Lista con los ids de referencia de los iconos
+    val listaIconos = listOf<Int>( // Lista con los IDs de referencia de los iconos
         R.drawable.phone_icono,
         R.drawable.share_icono,
         R.drawable.mail_icono,
         R.drawable.github_logo
     )
 
-    val listaTextos = listOf<Int>( // Lista con los ids de referencia para los textos
+    val listaTextos = listOf<Int>( // Lista con los IDs de referencia para los textos
         R.string.numero_inventado,
         R.string.redes_inventadas,
         R.string.email_inventado,
         R.string.github_inventado
     )
-
 
     // Columna que contiene los contactos
     Column(
@@ -213,7 +212,12 @@ private fun FilasContacto(
  * @param fuente tipo de fuente del texto
  */
 @Composable
-fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier, fuente: FontFamily = FontFamily.Default) {
+fun CrearTexto(
+    texto: String,
+    size: Int,
+    modifier: Modifier = Modifier,
+    fuente: FontFamily = FontFamily.Default
+) {
     Text(
         text = texto,
         fontSize = size.sp,

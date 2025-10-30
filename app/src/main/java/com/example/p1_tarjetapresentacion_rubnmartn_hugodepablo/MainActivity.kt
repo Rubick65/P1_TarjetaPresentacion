@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -179,7 +180,8 @@ private fun FilasContacto(
 ) {
     // Fila que contiene el icono y el texto del contacto
     Row(
-        verticalAlignment = Alignment.CenterVertically // Centramos todos los elementos verticalmente
+        verticalAlignment = Alignment.CenterVertically, // Centramos todos los elementos verticalmente
+        modifier = Modifier.fillMaxWidth()
     ) {
         // Icono del contacto
         Icon(

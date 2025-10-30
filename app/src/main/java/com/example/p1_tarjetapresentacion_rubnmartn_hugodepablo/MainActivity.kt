@@ -89,7 +89,7 @@ fun ContenedorCentro(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally, //Indicamos que se centre en el medio
         modifier = modifier.padding(top = 50.dp) //Pequeña separacion arriba para que no este tan junto
     ) {
-        //Fila que contendra las imagenes principales.
+        //Fila que contendra las imagenes principales
         Row(modifier = Modifier.padding(bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically
             ) { //Separacion con la descripcion de abajo

@@ -1,5 +1,7 @@
 package com.example.p1_tarjetapresentacion_rubnmartn_hugodepablo
 
+//Creado por Hugo de Pablo López y Rubén Martín Andrade
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -56,11 +58,11 @@ private fun ContenedorUI(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         Image(
             painter = imagen,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
+            contentDescription = null, //Quitamos descripcíon de audio.
+            contentScale = ContentScale.Crop, //Para que ocupe toda la pantalla
             modifier = Modifier.fillMaxSize()
         )
-        // Aquí va la función del centro (Hugo De Pablo)
+        // Aquí va la función del centro (Hugo De Pablo López)
         ContenedorCentro(modifier = Modifier.align(Alignment.Center))
         // Aquí va la función de abajo (Rubén Martín Andrade)
         ContenedorContacto(modifier = Modifier.align(Alignment.BottomCenter))
@@ -74,21 +76,21 @@ private fun ContenedorUI(modifier: Modifier = Modifier) {
 @Composable
 private fun ContenedorCentro(modifier: Modifier = Modifier) {
     //Imagenes a implementar
-    val logoKotlin = painterResource(R.drawable.kotlin_logo)
     val logoAndroid = painterResource(R.drawable.android_studio_logo)
+    val logoKotlin = painterResource(R.drawable.kotlin_logo)
 
     //Columna que contiene a todos los elementos
     Column(
+        //Indicamos que se centre en el medio
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,//Indicamos que se centre en el medio
-        modifier = modifier //Pequeña separacion arriba para que no este tan junto
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
     ) {
         //Fila que contendra las imagenes principales.
         Row(
             modifier = Modifier.padding(bottom = 10.dp), //Separacion con la descripcion de abajo
             verticalAlignment = Alignment.CenterVertically // Centramos todos los elementos
         ) {
-
             //Se crean las imagenes, indicandoles la imagen y su tamaño
             CrearImagen(
                 logoAndroid,
@@ -175,7 +177,7 @@ private fun FilasContacto(
     imagenId: Int,
     modifier: Modifier = Modifier
 ) {
-    // Fila que contiene el icono y el texto del contacot
+    // Fila que contiene el icono y el texto del contacto
     Row(
         verticalAlignment = Alignment.CenterVertically // Centramos todos los elementos verticalmente
     ) {
@@ -183,7 +185,7 @@ private fun FilasContacto(
         Icon(
             painter = painterResource(imagenId), // Imagen del icono
             contentDescription = null, //Sin descripción de voz
-            tint = Color.White, // Ponemos las imagenes a color negro
+            tint = Color.White, // Ponemos las imagenes a color blanco
             modifier = Modifier
                 .size(29.dp) // Tamaño estandar para todos los iconos
         )
@@ -208,7 +210,7 @@ private fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier) 
     Text(
         text = texto,
         fontSize = size.sp,
-        color = Color.White,
+        color = Color.White, //Color blanco predeterminado
         lineHeight = 20.sp, //Espacio predeterminado entre filas
         modifier = modifier
     )
@@ -223,15 +225,15 @@ private fun CrearTexto(texto: String, size: Int, modifier: Modifier = Modifier) 
 private fun CrearImagen(imagen: Painter, modifier: Modifier = Modifier) {
     Image(
         painter = imagen,
-        contentDescription = null,
+        contentDescription = null, //Quitamos descripcion de audio
         modifier = modifier
     )
 }
 
 @Preview(
     showBackground = true,
-    showSystemUi = true,
-    name = "My preview"
+    showSystemUi = true, //Para que se muestre como si fuera el teléfono
+    name = "Tarjeta de presentación"
 )
 @Composable
 fun GreetingPreview() {
